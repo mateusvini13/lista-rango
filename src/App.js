@@ -14,6 +14,7 @@ function App() {
 
       <Switch>
         <Route path="/" exact component={Main} />
+        <Route path="/cardapio/:id?" component={Menu} />
       </Switch>
     </Router>
   );

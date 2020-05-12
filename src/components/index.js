@@ -1,5 +1,5 @@
 import Header from "./Header"
 import SearchBar from "./SearchBar"
-import RestaurantCard from "./RestaurantCard"
+import Card from "./Card"
 
-export { Header, SearchBar, RestaurantCard };
+export { Header, SearchBar, Card };

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 export const Container = styled.div`
@@ -26,6 +26,35 @@ export const Container = styled.div`
     transition: 0.3s;
     transform: scale(0.95);
   }
+
+  ${({ menu }) => menu && css`
+    width: 385px;
+    height: 115px;
+
+    border-radius: 0;
+
+    ${Image} {
+      width: 115px;
+      height: 115px;
+
+      border-radius: 0;
+
+      > img {
+        width: 115px;
+        height: 115px;
+
+        border-radius: 0;
+      }
+    }
+
+    ${Content} {
+      > p {
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+    }
+  `}
+
 `;
 
 export const Image = styled.div`
@@ -59,14 +88,14 @@ export const Content = styled.div`
   > p {
     display: block;
 
-    height: 15px;
+    min-height: 15px;
     margin-bottom: 2px;
 
     font-size: 12px;
     font-weight: 400;
 
     &.title {
-      height: 19px;
+      min-height: 19px;
       
       font-size: 16px;
       font-weight: 500;
@@ -76,6 +105,31 @@ export const Content = styled.div`
   ${media.lessThan('medium')`
     padding-left: 10px;
   `}
+`
+
+export const Prices = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  p {
+    display: block;
+    height: 19px;
+
+    font-size: 16px;
+    color: #009CA3;
+
+    &.original {
+      height: 15px;
+
+      margin-left: 4px;
+      padding: 0 3px 0 3px;
+
+      color: #989898;
+      font-size: 12px;
+      text-decoration: line-through;
+    }
+  }
 `
 
 export const Open = styled.div`
@@ -99,6 +153,39 @@ export const Open = styled.div`
     text-align: center;
     color: #fff;
     font-size: 8px;
-    font-weight: bold;
+    font-weight: 600;
   }
+`
+export const Sale = styled.div`
+  position: absolute;
+  top: -12px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  height: 21px;
+
+  border-radius: 11px;
+  background-color: #2B0D61;
+
+  > p {
+    display: block;
+    padding: 0 12px 0 4px;
+
+    text-align: center;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 600;
+  }
+`
+
+export const Badge = styled.img`
+  display: block;
+  height: 12px;
+  width: 9px;
+
+  margin-left: 12px;
 `

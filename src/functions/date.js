@@ -13,7 +13,7 @@ function getWeekDay() {
   return date.getDay();
 }
 
-function checkTimeBetween(from, to) {
+function checkSchedule(from, to) {
   const now = getCurrentTime();
   if (now >= timeToMinutes(from) && now <= timeToMinutes(to)){
     return true;
@@ -22,8 +22,8 @@ function checkTimeBetween(from, to) {
   return false;
 }
 
-function getWorkingHours(hours){
-  //Prepares array with open times on each week day.
+function formatTimespans(hours){
+  //Prepares array with times on each week day.
   //Using JS default day values of 0-6 instead of 1-7 for easier array manipulation
   const schedule = [];
   for (var i = 0; i <= 6; i++){
@@ -59,6 +59,6 @@ export {
   timeToMinutes,
   getCurrentTime,
   getWeekDay,
-  checkTimeBetween,
-  getWorkingHours
+  checkSchedule,
+  formatTimespans
 }
