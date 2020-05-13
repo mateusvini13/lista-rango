@@ -23,8 +23,13 @@ export default createGlobalStyle`
     min-height: calc(100vh);
   }
 
+  p {
+    color: #404040;
+    font-family: "Montserrat", sans-serif;
+  }
+
   a {
-    color: #000;
+    color: #404040;
     text-decoration: none;
   }
 

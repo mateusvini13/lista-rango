@@ -13,7 +13,8 @@ function getWeekDay() {
   return date.getDay();
 }
 
-function checkTimeBetween(from, to, now) {
+function checkTimeBetween(from, to) {
+  const now = getCurrentTime();
   if (now >= timeToMinutes(from) && now <= timeToMinutes(to)){
     return true;
   }
@@ -22,29 +23,28 @@ function checkTimeBetween(from, to, now) {
 }
 
 function getWorkingHours(hours){
-
-  //Prepares array with open times on each week day
-  const open = [];
+  //Prepares array with open times on each week day.
+  //Using JS default day values of 0-6 instead of 1-7 for easier array manipulation
+  const schedule = [];
   for (var i = 0; i <= 6; i++){
-    open[i] = [];
+    schedule[i] = [];
   }
-
 
   try {
     //Map each work hour and check if it ends on next day
     hours.map((item, index) => {
       if(timeToMinutes(item.from) > timeToMinutes(item.to)){
         item.days.map(weekday => {
-          //Removes 1 from each week day so it matches javascript default day of the week values
-          open[weekday - 1].push({from: item.from, to: "23:59"})
+          //Subtracting 1 from each week day so it matches JS default day of the week values
+          schedule[weekday - 1].push({from: item.from, to: "23:59"})
 
           //Checks if saturday and adjusts next day to sunday
-          var nextDay = weekday < 7 ? weekday : 0;
-          open[nextDay].push({from: "00:00", to: item.to})
+          const nextDay = weekday < 7 ? weekday : 0;
+          schedule[nextDay].push({from: "00:00", to: item.to})
         })
       } else {
         item.days.map(weekday => {
-          open[weekday - 1].push({from: item.from, to: item.to})
+          schedule[weekday - 1].push({from: item.from, to: item.to})
         })
       }
     })
@@ -52,7 +52,7 @@ function getWorkingHours(hours){
     console.log(e)
   }
 
-  return open;
+  return schedule;
 }
 
 export {
