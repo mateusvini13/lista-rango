@@ -17,7 +17,6 @@ function Main() {
         return checkSchedule(shift.from, shift.to)
       })
     })
-    console.log('list', list)
 
     setRestaurants([ ...list ]);
   }

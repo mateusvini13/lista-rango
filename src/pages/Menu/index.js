@@ -14,8 +14,6 @@ function Menu({ match }) {
   
   // Check meals on sale
   async function checkSales(list){
-
-    console.log(list)
     //Map each meal in the menu list
     list.map((meal, index) => {
       if(meal.sales){
@@ -35,7 +33,6 @@ function Menu({ match }) {
       }
     })
 
-    //Sets to new array, or page won't detect change
     setMenu([ ...list]);
   }
 
