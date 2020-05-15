@@ -5,35 +5,63 @@ import { formatMoney } from '../../functions/currency'
 import { formatTimespans, getWorkingHours, getWeekDay, checkSchedule } from "../../functions/date"
 
 import { Header, SearchBar, Card } from "../../components"
-import { Container, Page, RestaurantInfo, Content, Image, Info, SearchContainer, MenuContainer } from './styles';
+import { Container, Page, RestaurantInfo, Content, Image, Info, SearchContainer, Group, GroupHeader, MenuContainer } from './styles';
 
 function Menu({ match }) {
   const [search, setSearch] = useState('');
   const [restaurant, setRestaurant] = useState([]);
-  const [menu, setMenu] = useState([]);
+  const [menu, setMenu] = useState({});
   
   // Check meals on sale
-  async function checkSales(list){
-    //Map each meal in the menu list
-    list.map((meal, index) => {
-      if(meal.sales){
-        meal.sales.map((sale, saleIndex) => {
-          sale.schedule[getWeekDay()].some(period => {
-            list[index].onSale = false;
-            if(checkSchedule(period.from, period.to)){
-              //Save current sale info
-              list[index].onSale = {
-                description: sale.description, 
-                price: sale.price
+  async function checkSales(groups){
+    const newMenu = {}
+
+    // map each meal in the group
+    Object.keys(groups).map((item) => {
+      newMenu[item] = {closed: true, items: []}
+      
+      // Check sales for that meal
+      groups[item].items.map((meal) => {
+        if(meal.sales){
+          meal.sales.map(sale => {
+            sale.schedule[getWeekDay()].some(period => {
+              meal.onSale = false;
+              if(checkSchedule(period.from, period.to)){
+                meal.onSale = {
+                  description: sale.description, 
+                  price: sale.price
+                }
+                return true;
               }
-              return true;
-            }
+            })
           })
-        })
+        }
+
+        // Adds meal to updated menu
+        newMenu[item].closed = groups[item].closed
+        newMenu[item].items.push(meal);
+      })
+    })
+
+    setMenu(newMenu);
+  }
+
+  async function toggleGroup(groupToToggle){
+    const newMenu = {}
+
+    // Map menu and toggle selected group
+    Object.keys(menu).map((group) => {
+      if(groupToToggle === group){
+        newMenu[group] = {
+          closed: !menu[group].closed, 
+          items: menu[group].items
+        }
+      } else {
+        newMenu[group] = menu[group];
       }
     })
 
-    setMenu([ ...list]);
+    setMenu(newMenu)
   }
 
   useEffect(() => {
@@ -55,17 +83,25 @@ function Menu({ match }) {
     async function fetchMenu() {
       const response = await api.get(`restaurants/${match.params.id}/menu`);
       const menuList = response.data;
-      
-      // Map sales for each item and prepare sale schedules
+      const grouped = {}
+
       menuList.map((item, index) => {
+        // Check sales for each item and prepare sale schedules
         if(item.sales){
           item.sales.map((sale, saleIndex) => {
             menuList[index].sales[saleIndex].schedule = formatTimespans(sale.hours);
           })
         }
+
+        // Group items
+        if(!grouped[item.group.toLowerCase()]){
+          grouped[item.group.toLowerCase()] = {closed: false, items: [menuList[index]]}
+        } else {
+          grouped[item.group.toLowerCase()].items = [ ...grouped[item.group.toLowerCase()].items, menuList[index]]
+        }
       })
       
-      await checkSales(menuList);
+      await checkSales(grouped);
     }
 
     fetchRestaurant()
@@ -76,7 +112,7 @@ function Menu({ match }) {
     // Check sales every 3 minutes
     const interval = setInterval(() => {
       checkSales(menu);
-    }, 180 * 1000);
+    }, 3 * 60000);
     return () => clearInterval(interval)
   }, [menu])
 
@@ -110,26 +146,35 @@ function Menu({ match }) {
               <SearchBar action={setSearch} labelText={"Buscar no cardápio"} />
             </SearchContainer>
 
-            <MenuContainer>
-              {menu.map(item => {
-                //Filter items according to lowercase
-                if(item.name.toLowerCase().includes(search.toLowerCase())){
-                  return (
-                    <div className="item">
-                      <Card
-                        menu={true}
-                        id={item.id}
-                        sale={item.onSale}
-                        price={item.price}
-                        name={item.name}
-                        address={item.address}
-                        picture={item.image}
-                      />
-                    </div>
-                  )
-                }
-              })}
-            </MenuContainer>
+              {Object.keys(menu).map((group) => (
+                <Group onClick={() => toggleGroup(group)} closed={menu[group].closed}>
+                  <GroupHeader>
+                    <p>{group}</p>
+                    <img src={require('../../assets/icons/chevron.svg')} />
+                  </GroupHeader>
+
+                  <MenuContainer>
+                    {menu[group].items.map(item => {
+                      //Filter items according to lowercase
+                      if(item.name.toLowerCase().includes(search.toLowerCase())){
+                        return (
+                          <div className="item">
+                            <Card
+                              menu={true}
+                              id={item.id}
+                              sale={item.onSale}
+                              price={item.price}
+                              name={item.name}
+                              address={item.address}
+                              picture={item.image}
+                            />
+                          </div>
+                        )
+                      }
+                    })}
+                  </MenuContainer>
+                </Group>
+              ))}
           </div>
 
           <div className="right"></div>
