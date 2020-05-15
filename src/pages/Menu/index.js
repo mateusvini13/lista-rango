@@ -147,8 +147,8 @@ function Menu({ match }) {
             </SearchContainer>
 
               {Object.keys(menu).map((group) => (
-                <Group onClick={() => toggleGroup(group)} closed={menu[group].closed}>
-                  <GroupHeader>
+                <Group closed={menu[group].closed}>
+                  <GroupHeader onClick={() => toggleGroup(group)}>
                     <p>{group}</p>
                     <img src={require('../../assets/icons/chevron.svg')} />
                   </GroupHeader>
