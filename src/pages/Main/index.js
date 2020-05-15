@@ -61,13 +61,15 @@ function Main() {
             //Filter restaurants according to search
             if(item.name.toLowerCase().includes(search.toLowerCase())){
               return (
-                <Card 
-                  id={item.id }
-                  open={item.open}
-                  name={item.name}
-                  desc={item.address}
-                  picture={item.image}
-                />
+                <div className="item">
+                  <Card 
+                    id={item.id }
+                    open={item.open}
+                    name={item.name}
+                    desc={item.address}
+                    picture={item.image}
+                  />
+                </div>
               )
             }
           })}

@@ -17,10 +17,13 @@ export const Page = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  width: 100%;
+  width: 90%;
+  max-width: 1216px;
   height: fit-content;
 
+  margin: auto;
   margin-top: 32px;
+  padding-bottom: 24px;
 `
 
 export const Title = styled.p`
@@ -37,10 +40,12 @@ export const SearchContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 100%;
+  width: 80%;
+  max-width: 840px;
   height: fit-content;
 
-  margin-bottom:46px;
+  margin-bottom: 46px;
+  
 `
 
 export const Restaurants = styled.div`
@@ -48,9 +53,13 @@ export const Restaurants = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 34px;
 
-  width: 90%;
-  max-width: 1216px;
+  width: 100%;
   height: fit-content;
+
+  .item {
+    display: flex;
+    justify-content: center;
+  }
 
   ${media.lessThan('large')`
     grid-template-columns: 1fr 1fr;

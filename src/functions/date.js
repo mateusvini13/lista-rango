@@ -55,10 +55,38 @@ function formatTimespans(hours){
   return schedule;
 }
 
+function getWorkingHours(days){
+  const weekdays = [
+    "",
+    "Domingo",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado"
+  ]
+
+  // Change text formatting according to number of days
+  if(days.length > 2){
+    return `${weekdays[days[0]]} à ${weekdays[days[days.length -1]]}`
+  } else if(days.length === 2){
+    return `${weekdays[days[0]]} e ${weekdays[days[1]]}`
+  } else {
+    // Special text for sundays only
+    if(days[0] === 1){
+      return "Domingos e Feriados"
+    } else {
+      return `${weekdays[days[0]]}`
+    }
+  }
+}
+
 export {
   timeToMinutes,
   getCurrentTime,
   getWeekDay,
   checkSchedule,
-  formatTimespans
+  formatTimespans,
+  getWorkingHours
 }

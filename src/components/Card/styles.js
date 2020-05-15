@@ -32,7 +32,7 @@ export const Container = styled.div`
     height: 115px;
 
     border-radius: 0;
-
+    
     ${Image} {
       width: 115px;
       height: 115px;

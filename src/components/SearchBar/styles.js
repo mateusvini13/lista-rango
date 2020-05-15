@@ -6,11 +6,10 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 61.5%;
+  width: 100%;
   height: 40px;
-  max-width: 840px;
 
-  background: #FBFBFB;
+  background: #E6E6E6;
   box-shadow: 0px 2px 4px #00000029;
   border-radius: 45px;
 `;
