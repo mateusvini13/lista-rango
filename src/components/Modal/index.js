@@ -5,7 +5,7 @@ import { formatMoney } from '../../functions/currency'
 import { FiPlus, FiMinus, FiX } from "react-icons/fi";
 import GoomerLogo from '../../assets/icons/goomer.svg'
 
-import { Content } from './styles'
+import { Container, Close, Content, Footer, Controls, Add } from './styles'
 
 const styles = {
   content : {
@@ -34,8 +34,12 @@ function ModalComponent({ meal, closeModal, ...props }){
 
   return (
     <Modal style={styles} {...props}>
-      <Content coverImage={!!meal.image}>
-        <div className="content">
+      <Container>
+        <Close onClick={() => closeModal()}>
+          <FiX color="#000000" size={32}/>
+        </Close>
+
+        <Content coverImage={!!meal.image}>
           <div className="img-container">
             <img src={meal.image ? meal.image : GoomerLogo} alt="imagem do prato"/>
           </div>  
@@ -48,14 +52,10 @@ function ModalComponent({ meal, closeModal, ...props }){
 
           <p className="price">{formatMoney(meal.sale ? meal.sale.price : meal.price)}</p>
           </div>
-        </div>
+        </Content>
 
-        <div className="footer">
-          <div className="close" onClick={() => closeModal()}>
-            <FiX color="#000000" size={32}/>
-          </div>
-
-          <div className="controls">
+        <Footer>
+          <Controls>
             <button className="btn" type="button" onClick={() => changeQuantity(-1)}>
               <FiMinus color="#009CA3" size={24}/>
             </button>
@@ -65,14 +65,14 @@ function ModalComponent({ meal, closeModal, ...props }){
             <button className="btn" type="button" onClick={() => changeQuantity(1)}>
               <FiPlus color="#009CA3" size={24}/>
             </button>
-          </div>
+          </Controls>
 
-          <div className="add">
+          <Add>
             <p>Adicionar</p>
-            <p>{formatMoney((meal.sale ? meal.sale.price : meal.price) * quantity)}</p>
-          </div>
-        </div>
-      </Content>
+            <p className="price">{formatMoney((meal.sale ? meal.sale.price : meal.price) * quantity)}</p>
+          </Add>
+        </Footer>
+      </Container>
     </Modal>
   )
 }

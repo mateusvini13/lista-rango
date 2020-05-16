@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import media from 'styled-media-query';
 
 export default createGlobalStyle`
   * {
@@ -56,5 +57,11 @@ export default createGlobalStyle`
   .ReactModal__Overlay--before-close{
       opacity: 0;
       background: #00000033 !important;
+  }
+
+  .ReactModal__Content {
+    ${media.lessThan('medium')`
+      width: 90%;
+    `}
   }
 `;
