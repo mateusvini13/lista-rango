@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Desafio Frontend Goomer: Lista Rango
 
-## Available Scripts
+Projeto do desafio para desenvolvedores Frontend da Goomer, Lista Rango. O projeto se trata de uma listagem de restaurantes e seus cardápios, com informações sobre seus horários de funcionamento, pratos e promoções.
 
-In the project directory, you can run:
+### Rodando o projeto
+Clone o projeto: 
+    $ git clone https://github.com/mateusvini13/lista-rango.git
 
-### `yarn start`
+Instale as dependências:
+    $ yarn
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Por fim, rode o projeto:
+    $ yarn start
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra algum erro nas bibliotecas, recomendamos usar esta versão. 
 
-### `yarn test`
+#### Estrutura de pastas do código fonte
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - :file_folder: **assets**: Arquivos como fontes e imagens
+ - :file_folder: **components**: Componentes gerais usados em várias páginas
+ - :file_folder: **functions**: Funções de uso geral
+ - :file_folder: **pages**: Páginas do projeto
+ - :file_folder: **services**: Serviços, como a conexão com a API
 
-### `yarn build`
+## Desafios
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A principal dificuldade encontrada no projeto foi o tratamento de horários. No fim, foi optado por uma função que transforma os horários em minutos para melhor manipulação com lógica básica, dispensando o uso de bibliotecas de tratamento de data e hora. Essa mesma função foi adaptada para uso tanto na checagem de restaurantes abertos quanto para pratos em promoção.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Também foram realizados alguns tratamentos relacionados à alguns retornos inconsistentes de API. Alguns restaurantes, por exemplo, não retornam seus horários de funcionamento.  Alguns pratos também não possuem imagens e alguns nomes de grupos vieram duplicados, apenas com diferenças de capitalização no texto, o que foi tratado no front.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A API não retorna descrições para os produtos, então foram mantidos os textos *Lorem Ipsum* como descrições. Foi uma escolha pessoal, pois o design parecia vazio sem estes. No caso dos restaurantes, a descrição foi substituída pelos endereços.
 
-### `yarn eject`
+Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco confusa comparada com o design, já q os hrários dos restaurantes não são divididos sempre em três períodos como os do Design exemplo, e também não é informado se o dia 1 deve ser considerado sempre como "domingos e feriados" ou apenas domingo.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Melhorias
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ - Alguns trechos do código poderiam ter comentários mais descritivos
+ - Funções de tratamento de data para checagem de aberto/fechado e horário de promoções pode ser otimizada
+ - Utilizar transições e animações de CSS em alguns componentes como o menu dropdown do cardápio
