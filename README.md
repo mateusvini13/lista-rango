@@ -1,24 +1,26 @@
-# Desafio Frontend Goomer: Lista Rango
+# Desafio Frontend Goomer: :fork_and_knife: Lista Rango :fork_and_knife:
 
 Projeto do desafio para desenvolvedores Frontend da Goomer, Lista Rango. O projeto se trata de uma listagem de restaurantes e seus cardápios, com informações sobre seus horários de funcionamento, pratos e promoções.
 
-### Rodando o projeto`
+### :space_invader: Rodando o projeto
 
 Clone o projeto: 
 
-`$ git clone https://github.com/mateusvini13/lista-rango.git`
+:floppy_disk: `$ git clone https://github.com/mateusvini13/lista-rango.git`
 
 Instale as dependências:
 
-`$ yarn`
+:dvd: `$ yarn`
 
 Por fim, rode o projeto:
 
-`$ yarn start`
+:tada: `$ yarn start`
 
-O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra algum erro nas bibliotecas, recomendamos usar esta versão. 
+O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra algum erro nas bibliotecas, recomendamos usar esta versão.
 
-#### Estrutura de pastas do código fonte
+O projeto também pode ser acessado diretamente em [listarango.netlify.app](https://listarango.netlify.app/).
+
+#### :computer: Estrutura de pastas do código fonte
 
  - :file_folder: **assets**: Arquivos como fontes e imagens
  - :file_folder: **components**: Componentes gerais usados em várias páginas
@@ -26,7 +28,7 @@ O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra al
  - :file_folder: **pages**: Páginas do projeto
  - :file_folder: **services**: Serviços, como a conexão com a API
 
-## Desafios
+## :video_game: Desafios
 
 A principal dificuldade encontrada no projeto foi o tratamento de horários. No fim, foi optado por uma função que transforma os horários em minutos para melhor manipulação com lógica básica, dispensando o uso de bibliotecas de tratamento de data e hora. Essa mesma função foi adaptada para uso tanto na checagem de restaurantes abertos quanto para pratos em promoção.
 
@@ -38,7 +40,7 @@ Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco co
 
 Apesar de não especificado no desafio ou design, uma versão mobile também foi desenvolvida com algumas adaptações.
 
-## Melhorias
+## :notes: Melhorias
 
  - Alguns trechos do código poderiam ter comentários mais descritivos
  - Funções de tratamento de data para checagem de aberto/fechado e horário de promoções pode ser otimizada
