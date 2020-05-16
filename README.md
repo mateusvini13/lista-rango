@@ -1,8 +1,8 @@
 # Desafio Frontend Goomer: :fork_and_knife: Lista Rango :fork_and_knife:
 
-Projeto do desafio para desenvolvedores Frontend da Goomer, Lista Rango. O projeto se trata de uma listagem de restaurantes e seus cardápios, com informações sobre seus horários de funcionamento, pratos e promoções.
+Projeto do desafio para desenvolvedores Frontend da Goomer, Lista Rango, uma lista de restaurantes e seus cardápios, com informações sobre seus horários de funcionamento, pratos e promoções.
 
-### :space_invader: Rodando o projeto
+### :space_invader: Rodando o projeto :space_invader:
 
 Clone o projeto: 
 
@@ -20,7 +20,7 @@ O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra al
 
 O projeto também pode ser acessado diretamente em [listarango.netlify.app](https://listarango.netlify.app/).
 
-#### :computer: Estrutura de pastas do código fonte
+#### :computer: Estrutura de pastas do código fonte :computer:
 
  - :file_folder: **assets**: Arquivos como fontes e imagens
  - :file_folder: **components**: Componentes gerais usados em várias páginas
@@ -28,7 +28,7 @@ O projeto também pode ser acessado diretamente em [listarango.netlify.app](http
  - :file_folder: **pages**: Páginas do projeto
  - :file_folder: **services**: Serviços, como a conexão com a API
 
-## :video_game: Desafios
+## :video_game: Desafios :video_game:
 
 A principal dificuldade encontrada no projeto foi o tratamento de horários. No fim, foi optado por uma função que transforma os horários em minutos para melhor manipulação com lógica básica, dispensando o uso de bibliotecas de tratamento de data e hora. Essa mesma função foi adaptada para uso tanto na checagem de restaurantes abertos quanto para pratos em promoção.
 
@@ -36,11 +36,11 @@ Também foram realizados alguns tratamentos relacionados à alguns retornos inco
 
 A API não retorna descrições para os produtos, então foram mantidos os textos *Lorem Ipsum* como descrições. Foi uma escolha pessoal, pois o design parecia vazio sem estes. No caso dos restaurantes, a descrição foi substituída pelos endereços.
 
-Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco confusa comparada com o design, já q os hrários dos restaurantes não são divididos sempre em três períodos como os do Design exemplo, e também não é informado se o dia 1 deve ser considerado sempre como "domingos e feriados" ou apenas domingo.
+Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco confusa comparada com o design, já que os horários dos restaurantes não são divididos sempre em três períodos como os do Design de exemplo, e também não é informado se o dia 1 deve ser considerado sempre como "domingos e feriados" ou apenas domingo.
 
-Apesar de não especificado no desafio ou design, uma versão mobile também foi desenvolvida com algumas adaptações.
+Apesar de não especificado no desafio ou design, uma versão mobile também foi desenvolvida com algumas adaptações, assim como responsividade para computadores com monitores em proporção 4:3.
 
-## :notes: Melhorias
+## :notes: Melhorias :notes:
 
  - Alguns trechos do código poderiam ter comentários mais descritivos
  - Funções de tratamento de data para checagem de aberto/fechado e horário de promoções pode ser otimizada
