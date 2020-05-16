@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { formatMoney } from '../../functions/currency'
 import { Container, Image, Content, Open, Prices, Sale, Badge } from './styles';
 
-function Card({menu, id, open, name, desc, picture, price, sale}) {
+function Card({menu, id, open, name, desc, picture, price, sale, onClick}) {
 
   function renderMenuItem() {
     return (
-      <Container menu>
+      <Container menu onClick={onClick}>
         { picture && (
           <Image>
             <img src={picture} alt={"Logo"} />

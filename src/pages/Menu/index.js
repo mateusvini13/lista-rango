@@ -4,13 +4,47 @@ import api from "../../services/api"
 import { formatMoney } from '../../functions/currency'
 import { formatTimespans, getWorkingHours, getWeekDay, checkSchedule } from "../../functions/date"
 
-import { Header, SearchBar, Card } from "../../components"
-import { Container, Page, RestaurantInfo, Content, Image, Info, SearchContainer, Group, GroupHeader, MenuContainer } from './styles';
+import { FiPlus, FiMinus, FiX } from "react-icons/fi";
+import { Header, SearchBar, Card, Modal } from "../../components"
+
+import GoomerLogo from '../../assets/icons/goomer.svg'
+
+import { 
+  Container, 
+  Page, 
+  RestaurantInfo, 
+  Content, 
+  Image, 
+  Info, 
+  SearchContainer, 
+  Group, 
+  GroupHeader, 
+  MenuContainer,
+  ModalContent
+} from './styles';
 
 function Menu({ match }) {
   const [search, setSearch] = useState('');
   const [restaurant, setRestaurant] = useState([]);
   const [menu, setMenu] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [meal, setMeal] = useState({})
+  const [quantity, setQuantity] = useState(1)
+
+  function closeModal(){
+    setIsOpen(false);
+  }
+
+  function openMealModal(selected){
+    console.log(selected)
+    setMeal(selected);
+    setIsOpen(true);
+  }
+
+  function changeQuantity(qtd){
+    const newQuantity = quantity + qtd > 0 ? quantity + qtd : 1;
+    setQuantity(newQuantity);
+  }
   
   // Check meals on sale
   async function checkSales(groups){
@@ -118,6 +152,51 @@ function Menu({ match }) {
 
   return (
     <Container>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <ModalContent coverImage={!!meal.image}>
+          <div className="content">
+            <div className="img-container">
+              <img src={meal.image ? meal.image : GoomerLogo} alt="imagem do prato"/>
+            </div>  
+
+            <div className="info">
+              <div className="text">
+                <p className="title">{meal.name}</p>
+                <p className="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+
+            <p className="price">{formatMoney(meal.sale ? meal.sale.price : meal.price)}</p>
+            </div>
+          </div>
+
+          <div className="footer">
+            <div className="close" onClick={() => closeModal()}>
+              <FiX color="#000000" size={32}/>
+            </div>
+
+            <div className="controls">
+              <button className="btn" type="button" onClick={() => changeQuantity(-1)}>
+                <FiMinus color="#009CA3" size={24}/>
+              </button>
+
+              <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
+
+              <button className="btn" type="button" onClick={() => changeQuantity(1)}>
+                <FiPlus color="#009CA3" size={24}/>
+              </button>
+            </div>
+
+            <div className="add">
+              <p>Adicionar</p>
+              <p>{formatMoney((meal.sale ? meal.sale.price : meal.price) * quantity)}</p>
+            </div>
+          </div>
+        </ModalContent>
+      </Modal>
       <Header />
 
       <Page>
@@ -159,7 +238,7 @@ function Menu({ match }) {
                       if(item.name.toLowerCase().includes(search.toLowerCase())){
                         return (
                           <div className="item">
-                            <Card
+                            <Card onClick={() => openMealModal(item)}
                               menu={true}
                               id={item.id}
                               sale={item.onSale}

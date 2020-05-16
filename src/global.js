@@ -45,13 +45,16 @@ export default createGlobalStyle`
   .ReactModal__Overlay {
       opacity: 0;
       transition: opacity 300ms ease-in-out;
+      background: #00000033 !important;
   }
 
   .ReactModal__Overlay--after-open{
       opacity: 1;
+      background: #00000033 !important;
   }
 
   .ReactModal__Overlay--before-close{
       opacity: 0;
+      background: #00000033 !important;
   }
 `;
