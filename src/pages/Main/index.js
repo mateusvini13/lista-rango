@@ -6,6 +6,8 @@ import { formatTimespans, getWeekDay, checkSchedule } from "../../functions/date
 import { Header, SearchBar, Card } from "../../components"
 import { Container, Page, Title, SearchContainer, Restaurants } from './styles';
 
+import { toast } from 'react-toastify';
+
 function Main() {
   const [search, setSearch] = useState('');
   const [restaurants, setRestaurants] = useState([]);
@@ -24,14 +26,18 @@ function Main() {
   useEffect(() => {
     // Fetch restaurant list
     async function fetchRestaurants() {
-      const response = await api.get('restaurants');
-      const restaurantList = response.data;
-      
-      restaurantList.map((item, index) => {
-        restaurantList[index].schedule = formatTimespans(item.hours);
-      })
-      
-      await updateOpen(restaurantList);
+      try {
+        const response = await api.get('restaurants');
+        const restaurantList = response.data;
+        
+        restaurantList.map((item, index) => {
+          restaurantList[index].schedule = formatTimespans(item.hours);
+        })
+        
+        await updateOpen(restaurantList);
+      } catch (error) {
+        toast.error('Erro ao buscar restaurantes. Tente novamente!');
+      }
     }
     
     fetchRestaurants()

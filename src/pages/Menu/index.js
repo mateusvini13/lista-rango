@@ -7,6 +7,9 @@ import { formatTimespans, getWorkingHours, getWeekDay, checkSchedule } from "../
 import { FiPlus, FiMinus, FiX } from "react-icons/fi";
 import { Header, SearchBar, Card, Modal } from "../../components"
 
+import { toast } from 'react-toastify';
+import { useParams, useHistory } from 'react-router-dom';
+
 import GoomerLogo from '../../assets/icons/goomer.svg'
 
 import { 
@@ -23,7 +26,10 @@ import {
   ModalContent
 } from './styles';
 
-function Menu({ match }) {
+function Menu() {
+  const { id } = useParams();
+  const history = useHistory();
+
   const [search, setSearch] = useState('');
   const [restaurant, setRestaurant] = useState([]);
   const [menu, setMenu] = useState({});
@@ -101,46 +107,62 @@ function Menu({ match }) {
   useEffect(() => {
     // Fetch restaurant list
     async function fetchRestaurant() {
-      const response = await api.get(`restaurants/${match.params.id}`);
-      const restaurantData = response.data;
+      try {
+        const response = await api.get(`restaurants/${id}`);
+        const restaurantData = response.data;
 
-      if(restaurantData.hours){
-        restaurantData.hours.map((item, index) => {
-          restaurantData.hours[index].working = getWorkingHours(item.days);
-        })
+        if(restaurantData.hours){
+          restaurantData.hours.map((item, index) => {
+            restaurantData.hours[index].working = getWorkingHours(item.days);
+          })
+        }
+
+        setRestaurant(restaurantData)
+      } catch (error) {
+        if(error.response.status === 404){
+          toast.error('Restaurante não encontrado!');
+        } else {
+          toast.error('Erro ao buscar dados do restaurante. Tente novamente!');
+        }
+
+        history.push('/');
       }
-
-      setRestaurant(restaurantData)
+      
     }
 
     // Fetch menu
     async function fetchMenu() {
-      const response = await api.get(`restaurants/${match.params.id}/menu`);
-      const menuList = response.data;
-      const grouped = {}
+      try {
+        const response = await api.get(`restaurants/${id}/menu`);
+        const menuList = response.data;
+        const grouped = {}
 
-      menuList.map((item, index) => {
-        // Check sales for each item and prepare sale schedules
-        if(item.sales){
-          item.sales.map((sale, saleIndex) => {
-            menuList[index].sales[saleIndex].schedule = formatTimespans(sale.hours);
-          })
-        }
+        menuList.map((item, index) => {
+          // Check sales for each item and prepare sale schedules
+          if(item.sales){
+            item.sales.map((sale, saleIndex) => {
+              menuList[index].sales[saleIndex].schedule = formatTimespans(sale.hours);
+            })
+          }
 
-        // Group items
-        if(!grouped[item.group.toLowerCase()]){
-          grouped[item.group.toLowerCase()] = {closed: false, items: [menuList[index]]}
-        } else {
-          grouped[item.group.toLowerCase()].items = [ ...grouped[item.group.toLowerCase()].items, menuList[index]]
-        }
-      })
-      
-      await checkSales(grouped);
+          // Group items
+          if(!grouped[item.group.toLowerCase()]){
+            grouped[item.group.toLowerCase()] = {closed: false, items: [menuList[index]]}
+          } else {
+            grouped[item.group.toLowerCase()].items = [ ...grouped[item.group.toLowerCase()].items, menuList[index]]
+          }
+        })
+        
+        await checkSales(grouped);
+      } catch (error) {
+        toast.error('Erro ao buscar cardápio. Tente novamente!');
+        history.push('/');
+      }
     }
 
     fetchRestaurant()
     fetchMenu() 
-  }, [match.params.id])
+  }, [history, id])
 
   useEffect(() => {
     // Check sales every 3 minutes

@@ -2,15 +2,19 @@
 
 Projeto do desafio para desenvolvedores Frontend da Goomer, Lista Rango. O projeto se trata de uma listagem de restaurantes e seus cardápios, com informações sobre seus horários de funcionamento, pratos e promoções.
 
-### Rodando o projeto
+### Rodando o projeto`
+
 Clone o projeto: 
-    $ git clone https://github.com/mateusvini13/lista-rango.git
+
+`$ git clone https://github.com/mateusvini13/lista-rango.git`
 
 Instale as dependências:
-    $ yarn
+
+`$ yarn`
 
 Por fim, rode o projeto:
-    $ yarn start
+
+`$ yarn start`
 
 O projeto foi desenvolvido usando a versão 12.14.1 do *Node.js*. Caso ocorra algum erro nas bibliotecas, recomendamos usar esta versão. 
 
@@ -37,3 +41,4 @@ Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco co
  - Alguns trechos do código poderiam ter comentários mais descritivos
  - Funções de tratamento de data para checagem de aberto/fechado e horário de promoções pode ser otimizada
  - Utilizar transições e animações de CSS em alguns componentes como o menu dropdown do cardápio
+ - Melhorar os textos dos toasts de erro de retorno das APIs
