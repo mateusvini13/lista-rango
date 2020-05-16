@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FiArrowLeft } from 'react-icons/fi'
 import { Container, GoBack } from './styles';
@@ -16,3 +17,11 @@ function Header({ showBack }) {
 }
 
 export default Header;
+
+Header.defaultProps = {
+  showBack: false
+};
+
+Header.propTypes = {
+  showBack: PropTypes.bool.isRequired,
+};

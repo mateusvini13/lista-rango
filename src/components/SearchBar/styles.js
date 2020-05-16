@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const Container = styled.div`
   position: relative;
@@ -30,6 +31,10 @@ export const Label = styled.div`
     font-size: 16px;
     font-weight: 500;
   }
+
+  ${media.lessThan('medium')`
+    display: none;
+  `}
 `
 export const Input = styled.input`
   position: relative;
@@ -42,6 +47,14 @@ export const Input = styled.input`
   border: none;
   font-size: 16px;
   font-weight: 400;
+
+  ::placeholder {
+    opacity: 0;
+  }
+
+  ${media.lessThan('medium')`
+    opacity: 1;
+  `}
 `
 export const Icon = styled.img`
   display: block;

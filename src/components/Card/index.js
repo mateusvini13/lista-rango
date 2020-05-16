@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 import { formatMoney } from '../../functions/currency'
 import { Container, Image, Content, Open, Prices, Sale, Badge } from './styles';
@@ -17,7 +18,7 @@ function Card({menu, id, open, name, desc, picture, price, sale, onClick}) {
 
         <Content>
           <p className="title">{name}</p>
-          <p>{desc ? desc : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"}</p>
+          <p>{desc}</p>
           <Prices>
             <p>{sale ? formatMoney(sale.price) : formatMoney(price)}</p>
             {sale && (
@@ -48,7 +49,7 @@ function Card({menu, id, open, name, desc, picture, price, sale, onClick}) {
 
           <Content>
             <p className="title">{name}</p>
-            <p>{desc ? desc : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"}</p>
+            <p>{desc}</p>
           </Content>
 
           <Open open={open}>
@@ -68,3 +69,21 @@ function Card({menu, id, open, name, desc, picture, price, sale, onClick}) {
 }
 
 export default Card;
+
+Card.defaultProps = {
+  menu: false,
+  open: false,
+  desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+};
+
+Card.propTypes = {
+  menu: PropTypes.bool.isRequired,
+  id: PropTypes.number,
+  open: PropTypes.bool,
+  name: PropTypes.bool,
+  picture: PropTypes.bool,
+  price: PropTypes.number,
+  sale: PropTypes.bool,
+  onClick: PropTypes.bool,
+  desc: PropTypes.string,
+};

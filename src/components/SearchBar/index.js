@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Label, Input, Icon  } from './styles';
 
@@ -7,7 +8,7 @@ function SearchBar({ labelText, action }) {
     <Container>
       <Label><p>{labelText}</p></Label>
 
-      <Input onChange={(e) => action(e.target.value)}></Input>
+      <Input placeholder={labelText} onChange={(e) => action(e.target.value)}></Input>
       
       <Icon src={require('../../assets/icons/search.svg')}/>
     </Container>
@@ -15,3 +16,12 @@ function SearchBar({ labelText, action }) {
 }
 
 export default SearchBar;
+
+SearchBar.defaultProps = {
+  labeltext: 'Buscar'
+};
+
+SearchBar.propTypes = {
+  labelText: PropTypes.string.isRequired,
+  action: PropTypes.func
+};
