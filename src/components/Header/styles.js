@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 import { Link } from 'react-router-dom';
 
@@ -27,4 +28,15 @@ export const GoBack = styled(Link)`
     transition: 0.3s;
     margin-left: 50px;
   }
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+    height: fit-content;
+
+    margin-left: 0;
+
+    :hover {
+      margin-left: 0;
+    }
+  `}
 `

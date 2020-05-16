@@ -53,7 +53,9 @@ export const Input = styled.input`
   }
 
   ${media.lessThan('medium')`
-    opacity: 1;
+    ::placeholder {
+      opacity: 1;
+    }
   `}
 `
 export const Icon = styled.img`
