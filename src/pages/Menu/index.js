@@ -197,7 +197,7 @@ function Menu({ match }) {
           </div>
         </ModalContent>
       </Modal>
-      <Header />
+      <Header showBack />
 
       <Page>
         <RestaurantInfo>

@@ -1,9 +1,18 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { FiArrowLeft } from 'react-icons/fi'
+import { Container, GoBack } from './styles';
 
-function Header() {
-  return <Container />;
+function Header({ showBack }) {
+  return (
+    <Container>
+      {showBack && (
+        <GoBack to={'/'}>
+          <FiArrowLeft color='#fff' size={30} />
+        </GoBack>
+      )}
+    </Container>
+  )
 }
 
 export default Header;
