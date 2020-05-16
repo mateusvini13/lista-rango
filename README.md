@@ -36,6 +36,8 @@ A API não retorna descrições para os produtos, então foram mantidos os texto
 
 Ainda na descrição dos restaurantes, a listagem de horários ficou um pouco confusa comparada com o design, já q os hrários dos restaurantes não são divididos sempre em três períodos como os do Design exemplo, e também não é informado se o dia 1 deve ser considerado sempre como "domingos e feriados" ou apenas domingo.
 
+Apesar de não especificado no desafio ou design, uma versão mobile também foi desenvolvida com algumas adaptações.
+
 ## Melhorias
 
  - Alguns trechos do código poderiam ter comentários mais descritivos
